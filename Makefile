@@ -37,7 +37,7 @@ clean:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
-	rm -fr build dist .egg sabah.egg-info .pytest_cache
+	rm -fr build dist .egg $(PACKAGENAME).egg-info .pytest_cache .mypy_cache
 
 ci:
 	pipenv run py.test -n 8 --boxed --junitxml=report.xml
