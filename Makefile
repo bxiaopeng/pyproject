@@ -5,6 +5,17 @@ PACKAGENAME := mypackage
 
 PY = $(shell find $(PACKAGENAME) -type f -name "*.py")
 
+help:
+	@echo "  lint       静态检查"
+	@echo "  fmt        格式化代码"
+	@echo "  env        创建虚拟环境"
+	@echo "  install    安装依赖的包"
+	@echo "  local      上传到本地服务器"
+	@echo "  test       运行测试"
+	@echo "  coverage   统计测试覆盖率"
+	@echo "  publish    发布"
+	@echo "  clean      清理编译/构建文件"
+
 lint:
 	isort --check -rc $(PACKAGENAME)
 	black --check $(PACKAGENAME)
@@ -25,7 +36,7 @@ install:
 	pipenv install --skip-lock
 	pipenv install --dev --skip-lock
 
-upload-local: test
+local: test
 	python setup.py sdist bdist_wheel
 	twine upload dist/* -r local
 	rm -fr build dist .egg $(PACKAGENAME).egg-info .pytest_cache
